@@ -1,0 +1,2 @@
+# aboutjapan
+anything about japan
