@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="15 soal latihan bahasa Jepang SSW Kaigo dengan furigana, pilihan ganda, kunci dan pembahasan.">
+  <title>Latihan SSW Kaigo · 15 Soal</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172232;
+      --muted: #4e5d68;
+      --paper: #f6f7f3;
+      --card: #fff;
+      --line: #d9e1dc;
+      --teal: #174e49;
+      --tint: #e7f1eb;
+      --rust: #8c332c;
+      font-family: system-ui, "Segoe UI", "Yu Gothic", Meiryo, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.55; }
+    [hidden] { display: none !important; }
+    a { color: var(--teal); text-underline-offset: .18em; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid #377d74; outline-offset: 3px; }
+    .wrap { width: min(67rem, calc(100% - 3rem)); margin-inline: auto; }
+    .top { background: var(--ink); color: white; }
+    .top .wrap { min-height: 3.5rem; display: flex; align-items: center; }
+    .top a { font-size: .92rem; color: #fff; text-decoration: none; }
+    .top a:hover { text-decoration: underline; }
+    .hero { background: #faf2eb; border-bottom: 1px solid #eadbd2; padding: 2.45rem 0 2.1rem; }
+    h1 { margin: 0; font: 700 clamp(2rem, 5vw, 3.75rem)/1.08 Georgia, serif; letter-spacing: -.035em; }
+    .hero p { color: var(--muted); margin: .65rem 0 0; max-width: 32rem; }
+    .layout { display: grid; grid-template-columns: 14.5rem minmax(0, 1fr); gap: 1.35rem; align-items: start; padding: 1.55rem 0 2.15rem; }
+    .sidebar, .question, .results, details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+    .sidebar { position: sticky; inset-block-start: 1rem; padding: 1rem; }
+    .sidebar h2 { margin: 0; font-size: 1rem; }
+    .progress-text { margin: .2rem 0 .8rem; font-size: .89rem; color: var(--muted); }
+    progress { width: 100%; height: .5rem; display: block; accent-color: var(--teal); }
+    .jumps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .38rem; margin: 1rem 0; }
+    .jump { padding: 0; min-height: 2.4rem; border-radius: 6px; border: 1px solid var(--line); background: white; color: var(--ink); font-size: .86rem; font-variant-numeric: tabular-nums; }
+    .jump[data-answered="true"] { background: var(--tint); border-color: #7ea69d; font-weight: 650; }
+    .jump[aria-current="step"] { color: white; background: var(--teal); border-color: var(--teal); }
+    .toggle { display: flex; align-items: center; gap: .45rem; font-size: .9rem; min-height: 2.2rem; color: var(--teal); cursor: pointer; }
+    .toggle input { margin: 0; width: 1.05rem; height: 1.05rem; accent-color: var(--teal); }
+    .question { padding: clamp(1rem, 3vw, 1.75rem); border-top: 4px solid var(--teal); margin: 0 0 .9rem; }
+    .topic { margin: 0 0 .35rem; color: var(--rust); font-weight: 700; font-size: .9rem; }
+    .question h2 { font-size: clamp(1.16rem, 2.5vw, 1.47rem); line-height: 1.7; margin: 0 0 .9rem; }
+    ruby { ruby-position: over; }
+    rt { font-size: .58em; font-weight: 550; color: #455660; }
+    .no-ruby rt { display: none; }
+    mark { background: #fff0cb; color: inherit; padding: .04em .12em; box-decoration-break: clone; }
+    .passage { border-radius: 9px; padding: .85rem 1rem; margin: 0 0 .9rem; background: #f1f5f2; line-height: 2; font-size: 1.02rem; }
+    .passage p { margin: 0; }
+    .passage p + p { margin-top: .5rem; }
+    .line { display: grid; grid-template-columns: minmax(4.6rem, max-content) minmax(0, 1fr); gap: .65rem; }
+    .line strong { color: var(--teal); font-size: .91em; }
+    fieldset { border: 0; margin: 0; padding: 0; min-inline-size: 0; display: grid; gap: .45rem; }
+    .choice { display: grid; grid-template-columns: auto 1.1rem minmax(0, 1fr); align-items: center; gap: .52rem; padding: .55rem .72rem; border-radius: 8px; border: 1px solid var(--line); min-height: 2.8rem; cursor: pointer; line-height: 1.9; }
+    .choice:hover, .choice:focus-within { border-color: #789a90; }
+    .choice:has(input:checked) { background: #ebf4f0; border-color: #508378; }
+    .choice input { margin: 0; accent-color: var(--teal); }
+    .letter { color: var(--teal); font-weight: 700; }
+    .choice.is-correct { background: #e2f2e8; border-color: #54856c; }
+    .choice.is-wrong { background: #fff0eb; border-color: #a64c42; }
+    .feedback { margin: .8rem 0 0; font-size: .91rem; font-weight: 650; color: var(--teal); }
+    .controls, .grade-controls { display: flex; gap: .55rem; flex-wrap: wrap; align-items: center; }
+    .controls { justify-content: space-between; margin-bottom: .8rem; }
+    .grade-controls { margin-bottom: .85rem; }
+    .action { min-height: 2.7rem; padding: .48rem .82rem; border: 1px solid #a9bdb6; border-radius: 8px; background: #fff; color: var(--teal); font-weight: 650; font-size: .94rem; }
+    .action:hover:not(:disabled) { background: var(--tint); }
+    .action:disabled { opacity: .48; cursor: default; }
+    .primary { background: var(--teal); color: white; border-color: var(--teal); }
+    .primary:hover:not(:disabled) { background: #25625a; }
+    .step { color: var(--muted); font-size: .94rem; }
+    .results { padding: .85rem 1rem; margin: 0 0 .8rem; border-color: #a9c3b7; background: #f3faf5; }
+    .results h2 { margin: 0 0 .2rem; font-size: 1.16rem; }
+    .results p { margin: 0; color: var(--muted); }
+    details { padding: .75rem 1rem; }
+    summary { cursor: pointer; font-weight: 700; color: var(--teal); }
+    .key { margin: .7rem 0 .35rem; padding: 0 0 0 1.7rem; }
+    .key li { padding: .45rem 0; border-bottom: 1px solid var(--line); }
+    .key li:last-child { border: none; }
+    .key p { margin: .12rem 0 0; color: var(--muted); font-size: .92rem; }
+    footer { border-top: 1px solid var(--line); padding: 1rem 0 1.8rem; color: var(--muted); font-size: .85rem; }
+    footer p { margin: 0; }
+    @media (max-width: 700px) {
+      .wrap { width: calc(100% - 1.5rem); }
+      .hero { padding: 1.55rem 0 1.3rem; }
+      .layout { display: block; padding-top: .85rem; }
+      .sidebar { position: static; margin-bottom: .85rem; }
+      .jumps { margin: .6rem 0 .25rem; }
+      .jump { min-height: 2.6rem; }
+      .line { display: block; }
+      .line strong { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top"><div class="wrap"><a href="../">← Latihan Mensetsu Kaigo</a></div></header>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Latihan SSW Kaigo</h1>
+      <p>Pilih satu jawaban untuk setiap soal. Periksa hasilmu untuk melihat nilai dan pembahasan.</p>
+    </div>
+  </section>
+  <main class="wrap layout">
+    <aside class="sidebar" id="sidebar" hidden aria-labelledby="index-title">
+      <h2 id="index-title">Daftar soal</h2>
+      <p id="progress-text" class="progress-text" aria-live="polite"></p>
+      <progress id="progress" value="0" max="15" aria-label="Soal terjawab"></progress>
+      <nav class="jumps" aria-label="Pilih nomor soal">
+          <button type="button" class="jump" aria-label="Soal 1">01</button>
+          <button type="button" class="jump" aria-label="Soal 2">02</button>
+          <button type="button" class="jump" aria-label="Soal 3">03</button>
+          <button type="button" class="jump" aria-label="Soal 4">04</button>
+          <button type="button" class="jump" aria-label="Soal 5">05</button>
+          <button type="button" class="jump" aria-label="Soal 6">06</button>
+          <button type="button" class="jump" aria-label="Soal 7">07</button>
+          <button type="button" class="jump" aria-label="Soal 8">08</button>
+          <button type="button" class="jump" aria-label="Soal 9">09</button>
+          <button type="button" class="jump" aria-label="Soal 10">10</button>
+          <button type="button" class="jump" aria-label="Soal 11">11</button>
+          <button type="button" class="jump" aria-label="Soal 12">12</button>
+          <button type="button" class="jump" aria-label="Soal 13">13</button>
+          <button type="button" class="jump" aria-label="Soal 14">14</button>
+          <button type="button" class="jump" aria-label="Soal 15">15</button>
+      </nav>
+      <label class="toggle"><input type="checkbox" id="furigana" checked> Tampilkan furigana</label>
+    </aside>
+    <div>
+      <form id="quiz">
+      <section class="question" id="soal-1" data-key="b" aria-labelledby="judul-1">
+        <p class="topic">Kosakata</p>
+        <h2 id="judul-1" lang="ja" tabindex="-1"><ruby>同<rp>（</rp><rt>おな</rt><rp>）</rp></ruby>じ<ruby>意味<rp>（</rp><rt>いみ</rt><rp>）</rp></ruby>を<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>んで<ruby>下<rp>（</rp><rt>くだ</rt><rp>）</rp></ruby>さい。</h2>
+        <div class="passage" lang="ja">
+          <p><ruby>山田<rp>（</rp><rt>やまだ</rt><rp>）</rp></ruby>さんが<ruby>自分<rp>（</rp><rt>じぶん</rt><rp>）</rp></ruby>で<ruby>食事<rp>（</rp><rt>しょくじ</rt><rp>）</rp></ruby>をする<ruby>間<rp>（</rp><rt>あいだ</rt><rp>）</rp></ruby>、そばで<mark><ruby>見守<rp>（</rp><rt>みまも</rt><rp>）</rp></ruby>り</mark>をします。</p>
+        </div>
+        <fieldset aria-labelledby="judul-1">
+          <label class="choice">
+            <input type="radio" name="soal-1" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>食事<rp>（</rp><rt>しょくじ</rt><rp>）</rp></ruby>をやめてもらうこと</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-1" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>必要<rp>（</rp><rt>ひつよう</rt><rp>）</rp></ruby>なときに<ruby>手伝<rp>（</rp><rt>てつだ</rt><rp>）</rp></ruby>えるように<ruby>様子<rp>（</rp><rt>ようす</rt><rp>）</rp></ruby>を<ruby>見<rp>（</rp><rt>み</rt><rp>）</rp></ruby>ること</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-1" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>最初<rp>（</rp><rt>さいしょ</rt><rp>）</rp></ruby>から<ruby>全部<rp>（</rp><rt>ぜんぶ</rt><rp>）</rp></ruby>を<ruby>手伝<rp>（</rp><rt>てつだ</rt><rp>）</rp></ruby>うこと</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-1" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>別<rp>（</rp><rt>べつ</rt><rp>）</rp></ruby>の<ruby>部屋<rp>（</rp><rt>へや</rt><rp>）</rp></ruby>で<ruby>待<rp>（</rp><rt>ま</rt><rp>）</rp></ruby>つこと</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-2" data-key="d" aria-labelledby="judul-2">
+        <p class="topic">Kosakata</p>
+        <h2 id="judul-2" lang="ja" tabindex="-1"><ruby>同<rp>（</rp><rt>おな</rt><rp>）</rp></ruby>じ<ruby>意味<rp>（</rp><rt>いみ</rt><rp>）</rp></ruby>を<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>んで<ruby>下<rp>（</rp><rt>くだ</rt><rp>）</rp></ruby>さい。</h2>
+        <div class="passage" lang="ja">
+          <p><ruby>今日<rp>（</rp><rt>きょう</rt><rp>）</rp></ruby>の<ruby>夜<rp>（</rp><rt>よる</rt><rp>）</rp></ruby>は<ruby>私<rp>（</rp><rt>わたし</rt><rp>）</rp></ruby>が<mark><ruby>夜勤<rp>（</rp><rt>やきん</rt><rp>）</rp></ruby></mark>です。</p>
+        </div>
+        <fieldset aria-labelledby="judul-2">
+          <label class="choice">
+            <input type="radio" name="soal-2" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>朝<rp>（</rp><rt>あさ</rt><rp>）</rp></ruby>だけ<ruby>働<rp>（</rp><rt>はたら</rt><rp>）</rp></ruby>くこと</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-2" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>仕事<rp>（</rp><rt>しごと</rt><rp>）</rp></ruby>を<ruby>休<rp>（</rp><rt>やす</rt><rp>）</rp></ruby>むこと</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-2" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>昼<rp>（</rp><rt>ひる</rt><rp>）</rp></ruby>だけ<ruby>働<rp>（</rp><rt>はたら</rt><rp>）</rp></ruby>くこと</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-2" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>夜<rp>（</rp><rt>よる</rt><rp>）</rp></ruby>に<ruby>働<rp>（</rp><rt>はたら</rt><rp>）</rp></ruby>くこと</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-3" data-key="a" aria-labelledby="judul-3">
+        <p class="topic">Kosakata</p>
+        <h2 id="judul-3" lang="ja" tabindex="-1"><ruby>同<rp>（</rp><rt>おな</rt><rp>）</rp></ruby>じ<ruby>意味<rp>（</rp><rt>いみ</rt><rp>）</rp></ruby>を<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>んで<ruby>下<rp>（</rp><rt>くだ</rt><rp>）</rp></ruby>さい。</h2>
+        <div class="passage" lang="ja">
+          <p><ruby>朝<rp>（</rp><rt>あさ</rt><rp>）</rp></ruby>の<ruby>体温<rp>（</rp><rt>たいおん</rt><rp>）</rp></ruby>をノートに<mark><ruby>記録<rp>（</rp><rt>きろく</rt><rp>）</rp></ruby>します</mark>。</p>
+        </div>
+        <fieldset aria-labelledby="judul-3">
+          <label class="choice">
+            <input type="radio" name="soal-3" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>後<rp>（</rp><rt>あと</rt><rp>）</rp></ruby>で<ruby>分<rp>（</rp><rt>わ</rt><rp>）</rp></ruby>かるように<ruby>書<rp>（</rp><rt>か</rt><rp>）</rp></ruby>き<ruby>残<rp>（</rp><rt>のこ</rt><rp>）</rp></ruby>します</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-3" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>数値<rp>（</rp><rt>すうち</rt><rp>）</rp></ruby>を<ruby>忘<rp>（</rp><rt>わす</rt><rp>）</rp></ruby>れます</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-3" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja">ノートを<ruby>捨<rp>（</rp><rt>す</rt><rp>）</rp></ruby>てます</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-3" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>体温計<rp>（</rp><rt>たいおんけい</rt><rp>）</rp></ruby>を<ruby>片付<rp>（</rp><rt>かたづ</rt><rp>）</rp></ruby>けます</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-4" data-key="c" aria-labelledby="judul-4">
+        <p class="topic">Kosakata</p>
+        <h2 id="judul-4" lang="ja" tabindex="-1"><ruby>同<rp>（</rp><rt>おな</rt><rp>）</rp></ruby>じ<ruby>意味<rp>（</rp><rt>いみ</rt><rp>）</rp></ruby>を<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>んで<ruby>下<rp>（</rp><rt>くだ</rt><rp>）</rp></ruby>さい。</h2>
+        <div class="passage" lang="ja">
+          <p><ruby>田中<rp>（</rp><rt>たなか</rt><rp>）</rp></ruby>さんは<ruby>食事<rp>（</rp><rt>しょくじ</rt><rp>）</rp></ruby>の<ruby>後<rp>（</rp><rt>あと</rt><rp>）</rp></ruby>、<mark><ruby>居室<rp>（</rp><rt>きょしつ</rt><rp>）</rp></ruby></mark>に<ruby>戻<rp>（</rp><rt>もど</rt><rp>）</rp></ruby>りました。</p>
+        </div>
+        <fieldset aria-labelledby="judul-4">
+          <label class="choice">
+            <input type="radio" name="soal-4" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>職員<rp>（</rp><rt>しょくいん</rt><rp>）</rp></ruby>が<ruby>仕事<rp>（</rp><rt>しごと</rt><rp>）</rp></ruby>をする<ruby>部屋<rp>（</rp><rt>へや</rt><rp>）</rp></ruby></span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-4" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja">みんなで<ruby>食事<rp>（</rp><rt>しょくじ</rt><rp>）</rp></ruby>をする<ruby>場所<rp>（</rp><rt>ばしょ</rt><rp>）</rp></ruby></span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-4" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby>が<ruby>生活<rp>（</rp><rt>せいかつ</rt><rp>）</rp></ruby>する<ruby>部屋<rp>（</rp><rt>へや</rt><rp>）</rp></ruby></span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-4" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>服<rp>（</rp><rt>ふく</rt><rp>）</rp></ruby>を<ruby>洗<rp>（</rp><rt>あら</rt><rp>）</rp></ruby>う<ruby>場所<rp>（</rp><rt>ばしょ</rt><rp>）</rp></ruby></span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-5" data-key="b" aria-labelledby="judul-5">
+        <p class="topic">Isi bagian kosong</p>
+        <h2 id="judul-5" lang="ja" tabindex="-1">＿＿＿に<ruby>入<rp>（</rp><rt>はい</rt><rp>）</rp></ruby>る<ruby>最<rp>（</rp><rt>もっと</rt><rp>）</rp></ruby>も<ruby>適切<rp>（</rp><rt>てきせつ</rt><rp>）</rp></ruby>なものを<ruby>一<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>つ<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>びなさい。</h2>
+        <div class="passage" lang="ja">
+          <p><ruby>入浴<rp>（</rp><rt>にゅうよく</rt><rp>）</rp></ruby>の<ruby>後<rp>（</rp><rt>あと</rt><rp>）</rp></ruby>、からだをタオルでふいて、<ruby>乾<rp>（</rp><rt>かわ</rt><rp>）</rp></ruby>いた<ruby>服<rp>（</rp><rt>ふく</rt><rp>）</rp></ruby>に＿＿＿。</p>
+        </div>
+        <fieldset aria-labelledby="judul-5">
+          <label class="choice">
+            <input type="radio" name="soal-5" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>起<rp>（</rp><rt>お</rt><rp>）</rp></ruby>きます</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-5" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>着替<rp>（</rp><rt>きが</rt><rp>）</rp></ruby>えます</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-5" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>横<rp>（</rp><rt>よこ</rt><rp>）</rp></ruby>になります</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-5" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>散歩<rp>（</rp><rt>さんぽ</rt><rp>）</rp></ruby>します</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-6" data-key="a" aria-labelledby="judul-6">
+        <p class="topic">Isi bagian kosong</p>
+        <h2 id="judul-6" lang="ja" tabindex="-1">＿＿＿に<ruby>入<rp>（</rp><rt>はい</rt><rp>）</rp></ruby>る<ruby>最<rp>（</rp><rt>もっと</rt><rp>）</rp></ruby>も<ruby>適切<rp>（</rp><rt>てきせつ</rt><rp>）</rp></ruby>なものを<ruby>一<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>つ<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>びなさい。</h2>
+        <div class="passage" lang="ja">
+          <p><ruby>立<rp>（</rp><rt>た</rt><rp>）</rp></ruby>ったままでは<ruby>疲<rp>（</rp><rt>つか</rt><rp>）</rp></ruby>れるので、いすに＿＿＿<ruby>休<rp>（</rp><rt>やす</rt><rp>）</rp></ruby>みましょう。</p>
+        </div>
+        <fieldset aria-labelledby="judul-6">
+          <label class="choice">
+            <input type="radio" name="soal-6" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>座<rp>（</rp><rt>すわ</rt><rp>）</rp></ruby>って</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-6" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>立<rp>（</rp><rt>た</rt><rp>）</rp></ruby>って</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-6" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>歩<rp>（</rp><rt>ある</rt><rp>）</rp></ruby>いて</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-6" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>走<rp>（</rp><rt>はし</rt><rp>）</rp></ruby>って</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-7" data-key="d" aria-labelledby="judul-7">
+        <p class="topic">Situasi kaigo</p>
+        <h2 id="judul-7" lang="ja" tabindex="-1"><ruby>正<rp>（</rp><rt>ただ</rt><rp>）</rp></ruby>しいものを<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>んで<ruby>下<rp>（</rp><rt>くだ</rt><rp>）</rp></ruby>さい。</h2>
+        <div class="passage" lang="ja">
+          <p><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby>はゆっくり<ruby>話<rp>（</rp><rt>はな</rt><rp>）</rp></ruby>します。<ruby>職員<rp>（</rp><rt>しょくいん</rt><rp>）</rp></ruby>は<ruby>話<rp>（</rp><rt>はなし</rt><rp>）</rp></ruby>を<ruby>聞<rp>（</rp><rt>き</rt><rp>）</rp></ruby>くとき、どうしますか。</p>
+        </div>
+        <fieldset aria-labelledby="judul-7">
+          <label class="choice">
+            <input type="radio" name="soal-7" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>話<rp>（</rp><rt>はなし</rt><rp>）</rp></ruby>の<ruby>途中<rp>（</rp><rt>とちゅう</rt><rp>）</rp></ruby>で<ruby>答<rp>（</rp><rt>こた</rt><rp>）</rp></ruby>えを<ruby>決<rp>（</rp><rt>き</rt><rp>）</rp></ruby>めます</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-7" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>別<rp>（</rp><rt>べつ</rt><rp>）</rp></ruby>の<ruby>人<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>と<ruby>話<rp>（</rp><rt>はな</rt><rp>）</rp></ruby>しながら<ruby>聞<rp>（</rp><rt>き</rt><rp>）</rp></ruby>きます</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-7" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>何度<rp>（</rp><rt>なんど</rt><rp>）</rp></ruby>も<ruby>早<rp>（</rp><rt>はや</rt><rp>）</rp></ruby>く<ruby>話<rp>（</rp><rt>はな</rt><rp>）</rp></ruby>すように<ruby>言<rp>（</rp><rt>い</rt><rp>）</rp></ruby>います</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-7" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby>が<ruby>話<rp>（</rp><rt>はな</rt><rp>）</rp></ruby>し<ruby>終<rp>（</rp><rt>お</rt><rp>）</rp></ruby>わるまで<ruby>待<rp>（</rp><rt>ま</rt><rp>）</rp></ruby>ちます</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-8" data-key="c" aria-labelledby="judul-8">
+        <p class="topic">Percakapan</p>
+        <h2 id="judul-8" lang="ja" tabindex="-1"><ruby>次<rp>（</rp><rt>つぎ</rt><rp>）</rp></ruby>の<ruby>会話<rp>（</rp><rt>かいわ</rt><rp>）</rp></ruby>を<ruby>読<rp>（</rp><rt>よ</rt><rp>）</rp></ruby>んで、＿＿＿に<ruby>入<rp>（</rp><rt>はい</rt><rp>）</rp></ruby>る<ruby>最<rp>（</rp><rt>もっと</rt><rp>）</rp></ruby>も<ruby>適切<rp>（</rp><rt>てきせつ</rt><rp>）</rp></ruby>なものを<ruby>一<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>つ<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>びなさい。</h2>
+        <div class="passage" lang="ja">
+          <p class="line"><strong><ruby>介護職員<rp>（</rp><rt>かいごしょくいん</rt><rp>）</rp></ruby></strong><span>そろそろ<ruby>食堂<rp>（</rp><rt>しょくどう</rt><rp>）</rp></ruby>へ<ruby>行<rp>（</rp><rt>い</rt><rp>）</rp></ruby>く<ruby>時間<rp>（</rp><rt>じかん</rt><rp>）</rp></ruby>です。</span></p>
+<p class="line"><strong><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby></strong><span><ruby>上着<rp>（</rp><rt>うわぎ</rt><rp>）</rp></ruby>を<ruby>自分<rp>（</rp><rt>じぶん</rt><rp>）</rp></ruby>で<ruby>着<rp>（</rp><rt>き</rt><rp>）</rp></ruby>ます。もう<ruby>少<rp>（</rp><rt>すこ</rt><rp>）</rp></ruby>し<ruby>待<rp>（</rp><rt>ま</rt><rp>）</rp></ruby>ってください。</span></p>
+<p class="line"><strong><ruby>介護職員<rp>（</rp><rt>かいごしょくいん</rt><rp>）</rp></ruby></strong><span>＿＿＿。</span></p>
+        </div>
+        <fieldset aria-labelledby="judul-8">
+          <label class="choice">
+            <input type="radio" name="soal-8" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja">すぐに<ruby>出<rp>（</rp><rt>で</rt><rp>）</rp></ruby>かけますから、<ruby>今<rp>（</rp><rt>いま</rt><rp>）</rp></ruby>は<ruby>着<rp>（</rp><rt>き</rt><rp>）</rp></ruby>ないでください</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-8" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja">もう<ruby>遅<rp>（</rp><rt>おそ</rt><rp>）</rp></ruby>いですから、<ruby>着替<rp>（</rp><rt>きが</rt><rp>）</rp></ruby>えは<ruby>終<rp>（</rp><rt>お</rt><rp>）</rp></ruby>わりです</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-8" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja">わかりました。ここで<ruby>待<rp>（</rp><rt>ま</rt><rp>）</rp></ruby>っていますね</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-8" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja">では、<ruby>私<rp>（</rp><rt>わたし</rt><rp>）</rp></ruby>がすぐに<ruby>全部<rp>（</rp><rt>ぜんぶ</rt><rp>）</rp></ruby><ruby>着<rp>（</rp><rt>き</rt><rp>）</rp></ruby>せますね</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-9" data-key="b" aria-labelledby="judul-9">
+        <p class="topic">Percakapan</p>
+        <h2 id="judul-9" lang="ja" tabindex="-1"><ruby>次<rp>（</rp><rt>つぎ</rt><rp>）</rp></ruby>の<ruby>会話<rp>（</rp><rt>かいわ</rt><rp>）</rp></ruby>を<ruby>読<rp>（</rp><rt>よ</rt><rp>）</rp></ruby>んで、<ruby>正<rp>（</rp><rt>ただ</rt><rp>）</rp></ruby>しいものを<ruby>一<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>つ<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>びなさい。</h2>
+        <div class="passage" lang="ja">
+          <p class="line"><strong><ruby>介護職員<rp>（</rp><rt>かいごしょくいん</rt><rp>）</rp></ruby></strong><span><ruby>午後<rp>（</rp><rt>ごご</rt><rp>）</rp></ruby>のレクリエーションは、<ruby>歌<rp>（</rp><rt>うた</rt><rp>）</rp></ruby>と<ruby>折<rp>（</rp><rt>お</rt><rp>）</rp></ruby>り<ruby>紙<rp>（</rp><rt>がみ</rt><rp>）</rp></ruby>があります。<ruby>中村<rp>（</rp><rt>なかむら</rt><rp>）</rp></ruby>さんはどちらがいいですか。</span></p>
+<p class="line"><strong><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby></strong><span><ruby>今日<rp>（</rp><rt>きょう</rt><rp>）</rp></ruby>は<ruby>折<rp>（</rp><rt>お</rt><rp>）</rp></ruby>り<ruby>紙<rp>（</rp><rt>がみ</rt><rp>）</rp></ruby>がいいです。</span></p>
+<p class="line"><strong><ruby>介護職員<rp>（</rp><rt>かいごしょくいん</rt><rp>）</rp></ruby></strong><span>わかりました。<ruby>午後<rp>（</rp><rt>ごご</rt><rp>）</rp></ruby>２<ruby>時<rp>（</rp><rt>じ</rt><rp>）</rp></ruby>に<ruby>談話室<rp>（</rp><rt>だんわしつ</rt><rp>）</rp></ruby>で<ruby>始<rp>（</rp><rt>はじ</rt><rp>）</rp></ruby>まります。</span></p>
+        </div>
+        <fieldset aria-labelledby="judul-9">
+          <label class="choice">
+            <input type="radio" name="soal-9" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>中村<rp>（</rp><rt>なかむら</rt><rp>）</rp></ruby>さんは<ruby>午前<rp>（</rp><rt>ごぜん</rt><rp>）</rp></ruby>の<ruby>歌<rp>（</rp><rt>うた</rt><rp>）</rp></ruby>に<ruby>参加<rp>（</rp><rt>さんか</rt><rp>）</rp></ruby>します</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-9" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>折<rp>（</rp><rt>お</rt><rp>）</rp></ruby>り<ruby>紙<rp>（</rp><rt>がみ</rt><rp>）</rp></ruby>は<ruby>午後<rp>（</rp><rt>ごご</rt><rp>）</rp></ruby>２<ruby>時<rp>（</rp><rt>じ</rt><rp>）</rp></ruby>に<ruby>談話室<rp>（</rp><rt>だんわしつ</rt><rp>）</rp></ruby>で<ruby>始<rp>（</rp><rt>はじ</rt><rp>）</rp></ruby>まります</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-9" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>折<rp>（</rp><rt>お</rt><rp>）</rp></ruby>り<ruby>紙<rp>（</rp><rt>がみ</rt><rp>）</rp></ruby>は<ruby>食堂<rp>（</rp><rt>しょくどう</rt><rp>）</rp></ruby>で<ruby>始<rp>（</rp><rt>はじ</rt><rp>）</rp></ruby>まります</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-9" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>中村<rp>（</rp><rt>なかむら</rt><rp>）</rp></ruby>さんは<ruby>今日<rp>（</rp><rt>きょう</rt><rp>）</rp></ruby>、どちらにも<ruby>参加<rp>（</rp><rt>さんか</rt><rp>）</rp></ruby>したくないと<ruby>言<rp>（</rp><rt>い</rt><rp>）</rp></ruby>いました</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-10" data-key="c" aria-labelledby="judul-10">
+        <p class="topic">Percakapan</p>
+        <h2 id="judul-10" lang="ja" tabindex="-1"><ruby>次<rp>（</rp><rt>つぎ</rt><rp>）</rp></ruby>の<ruby>会話<rp>（</rp><rt>かいわ</rt><rp>）</rp></ruby>を<ruby>読<rp>（</rp><rt>よ</rt><rp>）</rp></ruby>んで、<ruby>正<rp>（</rp><rt>ただ</rt><rp>）</rp></ruby>しいものを<ruby>一<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>つ<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>びなさい。</h2>
+        <div class="passage" lang="ja">
+          <p class="line"><strong><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby></strong><span><ruby>窓<rp>（</rp><rt>まど</rt><rp>）</rp></ruby>の<ruby>近<rp>（</rp><rt>ちか</rt><rp>）</rp></ruby>くは<ruby>少<rp>（</rp><rt>すこ</rt><rp>）</rp></ruby>し<ruby>寒<rp>（</rp><rt>さむ</rt><rp>）</rp></ruby>いです。</span></p>
+<p class="line"><strong><ruby>介護職員<rp>（</rp><rt>かいごしょくいん</rt><rp>）</rp></ruby></strong><span><ruby>窓<rp>（</rp><rt>まど</rt><rp>）</rp></ruby>を<ruby>閉<rp>（</rp><rt>し</rt><rp>）</rp></ruby>めましょうか。それとも<ruby>席<rp>（</rp><rt>せき</rt><rp>）</rp></ruby>を<ruby>替<rp>（</rp><rt>か</rt><rp>）</rp></ruby>えますか。</span></p>
+<p class="line"><strong><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby></strong><span><ruby>席<rp>（</rp><rt>せき</rt><rp>）</rp></ruby>はこのままでいいです。<ruby>窓<rp>（</rp><rt>まど</rt><rp>）</rp></ruby>を<ruby>閉<rp>（</rp><rt>し</rt><rp>）</rp></ruby>めてください。</span></p>
+        </div>
+        <fieldset aria-labelledby="judul-10">
+          <label class="choice">
+            <input type="radio" name="soal-10" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>窓<rp>（</rp><rt>まど</rt><rp>）</rp></ruby>を<ruby>開<rp>（</rp><rt>あ</rt><rp>）</rp></ruby>けてほしいです</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-10" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>席<rp>（</rp><rt>せき</rt><rp>）</rp></ruby>を<ruby>替<rp>（</rp><rt>か</rt><rp>）</rp></ruby>えてほしいです</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-10" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>今<rp>（</rp><rt>いま</rt><rp>）</rp></ruby>の<ruby>席<rp>（</rp><rt>せき</rt><rp>）</rp></ruby>のままで、<ruby>窓<rp>（</rp><rt>まど</rt><rp>）</rp></ruby>を<ruby>閉<rp>（</rp><rt>し</rt><rp>）</rp></ruby>めてほしいです</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-10" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>部屋<rp>（</rp><rt>へや</rt><rp>）</rp></ruby>から<ruby>出<rp>（</rp><rt>で</rt><rp>）</rp></ruby>たいです</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-11" data-key="a" aria-labelledby="judul-11">
+        <p class="topic">Catatan perawatan</p>
+        <h2 id="judul-11" lang="ja" tabindex="-1"><ruby>次<rp>（</rp><rt>つぎ</rt><rp>）</rp></ruby>の<ruby>記録<rp>（</rp><rt>きろく</rt><rp>）</rp></ruby>を<ruby>読<rp>（</rp><rt>よ</rt><rp>）</rp></ruby>んで、<ruby>正<rp>（</rp><rt>ただ</rt><rp>）</rp></ruby>しいものを<ruby>一<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>つ<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>びなさい。</h2>
+        <div class="passage" lang="ja">
+          <p class="line"><strong>8:15</strong><span><ruby>佐藤<rp>（</rp><rt>さとう</rt><rp>）</rp></ruby>さんは<ruby>朝食<rp>（</rp><rt>ちょうしょく</rt><rp>）</rp></ruby>を<ruby>半分<rp>（</rp><rt>はんぶん</rt><rp>）</rp></ruby><ruby>食<rp>（</rp><rt>た</rt><rp>）</rp></ruby>べました。<ruby>食後<rp>（</rp><rt>しょくご</rt><rp>）</rp></ruby>は<ruby>居室<rp>（</rp><rt>きょしつ</rt><rp>）</rp></ruby>で<ruby>休<rp>（</rp><rt>やす</rt><rp>）</rp></ruby>みました。</span></p>
+<p class="line"><strong>12:10</strong><span><ruby>昼食<rp>（</rp><rt>ちゅうしょく</rt><rp>）</rp></ruby>は<ruby>全部<rp>（</rp><rt>ぜんぶ</rt><rp>）</rp></ruby><ruby>食<rp>（</rp><rt>た</rt><rp>）</rp></ruby>べました。お<ruby>茶<rp>（</rp><rt>ちゃ</rt><rp>）</rp></ruby>を１<ruby>杯<rp>（</rp><rt>ぱい</rt><rp>）</rp></ruby><ruby>飲<rp>（</rp><rt>の</rt><rp>）</rp></ruby>みました。</span></p>
+        </div>
+        <fieldset aria-labelledby="judul-11">
+          <label class="choice">
+            <input type="radio" name="soal-11" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>佐藤<rp>（</rp><rt>さとう</rt><rp>）</rp></ruby>さんは<ruby>昼食<rp>（</rp><rt>ちゅうしょく</rt><rp>）</rp></ruby>を<ruby>全部<rp>（</rp><rt>ぜんぶ</rt><rp>）</rp></ruby><ruby>食<rp>（</rp><rt>た</rt><rp>）</rp></ruby>べました</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-11" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>佐藤<rp>（</rp><rt>さとう</rt><rp>）</rp></ruby>さんは<ruby>朝食<rp>（</rp><rt>ちょうしょく</rt><rp>）</rp></ruby>を<ruby>全部<rp>（</rp><rt>ぜんぶ</rt><rp>）</rp></ruby><ruby>食<rp>（</rp><rt>た</rt><rp>）</rp></ruby>べました</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-11" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>佐藤<rp>（</rp><rt>さとう</rt><rp>）</rp></ruby>さんは<ruby>朝食<rp>（</rp><rt>ちょうしょく</rt><rp>）</rp></ruby>の<ruby>後<rp>（</rp><rt>あと</rt><rp>）</rp></ruby>、<ruby>散歩<rp>（</rp><rt>さんぽ</rt><rp>）</rp></ruby>をしました</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-11" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>佐藤<rp>（</rp><rt>さとう</rt><rp>）</rp></ruby>さんは<ruby>昼食<rp>（</rp><rt>ちゅうしょく</rt><rp>）</rp></ruby>のとき、お<ruby>茶<rp>（</rp><rt>ちゃ</rt><rp>）</rp></ruby>を<ruby>飲<rp>（</rp><rt>の</rt><rp>）</rp></ruby>みませんでした</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-12" data-key="d" aria-labelledby="judul-12">
+        <p class="topic">Informasi pengguna</p>
+        <h2 id="judul-12" lang="ja" tabindex="-1"><ruby>次<rp>（</rp><rt>つぎ</rt><rp>）</rp></ruby>の<ruby>利用者情報<rp>（</rp><rt>りようしゃじょうほう</rt><rp>）</rp></ruby>を<ruby>読<rp>（</rp><rt>よ</rt><rp>）</rp></ruby>んで、<ruby>正<rp>（</rp><rt>ただ</rt><rp>）</rp></ruby>しいものを<ruby>一<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>つ<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>びなさい。</h2>
+        <div class="passage" lang="ja">
+          <p class="line"><strong><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby></strong><span><ruby>高橋<rp>（</rp><rt>たかはし</rt><rp>）</rp></ruby>さん、82<ruby>歳<rp>（</rp><rt>さい</rt><rp>）</rp></ruby></span></p>
+<p class="line"><strong><ruby>食事<rp>（</rp><rt>しょくじ</rt><rp>）</rp></ruby></strong><span>スプーンで<ruby>自分<rp>（</rp><rt>じぶん</rt><rp>）</rp></ruby>で<ruby>食<rp>（</rp><rt>た</rt><rp>）</rp></ruby>べます。</span></p>
+<p class="line"><strong><ruby>移動<rp>（</rp><rt>いどう</rt><rp>）</rp></ruby></strong><span><ruby>部屋<rp>（</rp><rt>へや</rt><rp>）</rp></ruby>の<ruby>中<rp>（</rp><rt>なか</rt><rp>）</rp></ruby>では<ruby>杖<rp>（</rp><rt>つえ</rt><rp>）</rp></ruby>を<ruby>使<rp>（</rp><rt>つか</rt><rp>）</rp></ruby>います。<ruby>外出<rp>（</rp><rt>がいしゅつ</rt><rp>）</rp></ruby>するときは<ruby>車<rp>（</rp><rt>くるま</rt><rp>）</rp></ruby>いすを<ruby>使<rp>（</rp><rt>つか</rt><rp>）</rp></ruby>います。</span></p>
+<p class="line"><strong><ruby>更衣<rp>（</rp><rt>こうい</rt><rp>）</rp></ruby></strong><span><ruby>上着<rp>（</rp><rt>うわぎ</rt><rp>）</rp></ruby>は<ruby>自分<rp>（</rp><rt>じぶん</rt><rp>）</rp></ruby>で<ruby>着<rp>（</rp><rt>き</rt><rp>）</rp></ruby>ます。ボタンを<ruby>留<rp>（</rp><rt>と</rt><rp>）</rp></ruby>めるときだけ<ruby>手伝<rp>（</rp><rt>てつだ</rt><rp>）</rp></ruby>いが<ruby>必要<rp>（</rp><rt>ひつよう</rt><rp>）</rp></ruby>です。</span></p>
+        </div>
+        <fieldset aria-labelledby="judul-12">
+          <label class="choice">
+            <input type="radio" name="soal-12" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>高橋<rp>（</rp><rt>たかはし</rt><rp>）</rp></ruby>さんは<ruby>自分<rp>（</rp><rt>じぶん</rt><rp>）</rp></ruby>で<ruby>食<rp>（</rp><rt>た</rt><rp>）</rp></ruby>べることができません</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-12" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>高橋<rp>（</rp><rt>たかはし</rt><rp>）</rp></ruby>さんは<ruby>外出<rp>（</rp><rt>がいしゅつ</rt><rp>）</rp></ruby>するときに<ruby>杖<rp>（</rp><rt>つえ</rt><rp>）</rp></ruby>を<ruby>使<rp>（</rp><rt>つか</rt><rp>）</rp></ruby>います</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-12" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>高橋<rp>（</rp><rt>たかはし</rt><rp>）</rp></ruby>さんは<ruby>部屋<rp>（</rp><rt>へや</rt><rp>）</rp></ruby>の<ruby>中<rp>（</rp><rt>なか</rt><rp>）</rp></ruby>でも<ruby>車<rp>（</rp><rt>くるま</rt><rp>）</rp></ruby>いすを<ruby>使<rp>（</rp><rt>つか</rt><rp>）</rp></ruby>います</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-12" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>高橋<rp>（</rp><rt>たかはし</rt><rp>）</rp></ruby>さんはボタンを<ruby>留<rp>（</rp><rt>と</rt><rp>）</rp></ruby>めるときに<ruby>手伝<rp>（</rp><rt>てつだ</rt><rp>）</rp></ruby>いが<ruby>必要<rp>（</rp><rt>ひつよう</rt><rp>）</rp></ruby>です</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-13" data-key="b" aria-labelledby="judul-13">
+        <p class="topic">Serah terima</p>
+        <h2 id="judul-13" lang="ja" tabindex="-1"><ruby>次<rp>（</rp><rt>つぎ</rt><rp>）</rp></ruby>の<ruby>申<rp>（</rp><rt>もう</rt><rp>）</rp></ruby>し<ruby>送<rp>（</rp><rt>おく</rt><rp>）</rp></ruby>りを<ruby>読<rp>（</rp><rt>よ</rt><rp>）</rp></ruby>んで、<ruby>正<rp>（</rp><rt>ただ</rt><rp>）</rp></ruby>しいものを<ruby>一<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>つ<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>びなさい。</h2>
+        <div class="passage" lang="ja">
+          <p class="line"><strong><ruby>日勤<rp>（</rp><rt>にっきん</rt><rp>）</rp></ruby>の<ruby>職員<rp>（</rp><rt>しょくいん</rt><rp>）</rp></ruby>から</strong><span><ruby>鈴木<rp>（</rp><rt>すずき</rt><rp>）</rp></ruby>さんのご<ruby>家族<rp>（</rp><rt>かぞく</rt><rp>）</rp></ruby>から<ruby>電話<rp>（</rp><rt>でんわ</rt><rp>）</rp></ruby>がありました。<ruby>明日<rp>（</rp><rt>あした</rt><rp>）</rp></ruby>の<ruby>面会<rp>（</rp><rt>めんかい</rt><rp>）</rp></ruby>は、<ruby>午前<rp>（</rp><rt>ごぜん</rt><rp>）</rp></ruby>10<ruby>時<rp>（</rp><rt>じ</rt><rp>）</rp></ruby>から<ruby>午後<rp>（</rp><rt>ごご</rt><rp>）</rp></ruby>２<ruby>時<rp>（</rp><rt>じ</rt><rp>）</rp></ruby>に<ruby>変<rp>（</rp><rt>か</rt><rp>）</rp></ruby>わりました。<ruby>鈴木<rp>（</rp><rt>すずき</rt><rp>）</rp></ruby>さんには、まだ<ruby>伝<rp>（</rp><rt>つた</rt><rp>）</rp></ruby>えていません。</span></p>
+        </div>
+        <fieldset aria-labelledby="judul-13">
+          <label class="choice">
+            <input type="radio" name="soal-13" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>面会<rp>（</rp><rt>めんかい</rt><rp>）</rp></ruby>は<ruby>今日<rp>（</rp><rt>きょう</rt><rp>）</rp></ruby>の<ruby>午後<rp>（</rp><rt>ごご</rt><rp>）</rp></ruby>２<ruby>時<rp>（</rp><rt>じ</rt><rp>）</rp></ruby>です</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-13" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>明日<rp>（</rp><rt>あした</rt><rp>）</rp></ruby>の<ruby>面会<rp>（</rp><rt>めんかい</rt><rp>）</rp></ruby>は<ruby>午後<rp>（</rp><rt>ごご</rt><rp>）</rp></ruby>２<ruby>時<rp>（</rp><rt>じ</rt><rp>）</rp></ruby>に<ruby>変<rp>（</rp><rt>か</rt><rp>）</rp></ruby>わりました</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-13" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>明日<rp>（</rp><rt>あした</rt><rp>）</rp></ruby>の<ruby>面会<rp>（</rp><rt>めんかい</rt><rp>）</rp></ruby>はなくなりました</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-13" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>鈴木<rp>（</rp><rt>すずき</rt><rp>）</rp></ruby>さんには<ruby>新<rp>（</rp><rt>あたら</rt><rp>）</rp></ruby>しい<ruby>時間<rp>（</rp><rt>じかん</rt><rp>）</rp></ruby>をもう<ruby>伝<rp>（</rp><rt>つた</rt><rp>）</rp></ruby>えました</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-14" data-key="a" aria-labelledby="judul-14">
+        <p class="topic">Laporan insiden</p>
+        <h2 id="judul-14" lang="ja" tabindex="-1"><ruby>次<rp>（</rp><rt>つぎ</rt><rp>）</rp></ruby>の<ruby>報告<rp>（</rp><rt>ほうこく</rt><rp>）</rp></ruby>を<ruby>読<rp>（</rp><rt>よ</rt><rp>）</rp></ruby>んで、<ruby>正<rp>（</rp><rt>ただ</rt><rp>）</rp></ruby>しいものを<ruby>一<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>つ<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>びなさい。</h2>
+        <div class="passage" lang="ja">
+          <p class="line"><strong><ruby>日時<rp>（</rp><rt>にちじ</rt><rp>）</rp></ruby></strong><span>６<ruby>月<rp>（</rp><rt>がつ</rt><rp>）</rp></ruby>12<ruby>日<rp>（</rp><rt>にち</rt><rp>）</rp></ruby> 14:20</span></p>
+<p class="line"><strong><ruby>場所<rp>（</rp><rt>ばしょ</rt><rp>）</rp></ruby></strong><span>２<ruby>階<rp>（</rp><rt>かい</rt><rp>）</rp></ruby>の<ruby>廊下<rp>（</rp><rt>ろうか</rt><rp>）</rp></ruby></span></p>
+<p class="line"><strong><ruby>状況<rp>（</rp><rt>じょうきょう</rt><rp>）</rp></ruby></strong><span><ruby>清掃<rp>（</rp><rt>せいそう</rt><rp>）</rp></ruby>の<ruby>後<rp>（</rp><rt>あと</rt><rp>）</rp></ruby>、<ruby>廊下<rp>（</rp><rt>ろうか</rt><rp>）</rp></ruby>の<ruby>床<rp>（</rp><rt>ゆか</rt><rp>）</rp></ruby>がぬれていました。<ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby>が<ruby>通<rp>（</rp><rt>とお</rt><rp>）</rp></ruby>る<ruby>前<rp>（</rp><rt>まえ</rt><rp>）</rp></ruby>に<ruby>職員<rp>（</rp><rt>しょくいん</rt><rp>）</rp></ruby>が<ruby>気<rp>（</rp><rt>き</rt><rp>）</rp></ruby>づき、<ruby>床<rp>（</rp><rt>ゆか</rt><rp>）</rp></ruby>をふきました。<ruby>転倒<rp>（</rp><rt>てんとう</rt><rp>）</rp></ruby>した<ruby>人<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>はいませんでした。</span></p>
+        </div>
+        <fieldset aria-labelledby="judul-14">
+          <label class="choice">
+            <input type="radio" name="soal-14" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby>が<ruby>通<rp>（</rp><rt>とお</rt><rp>）</rp></ruby>る<ruby>前<rp>（</rp><rt>まえ</rt><rp>）</rp></ruby>に、<ruby>職員<rp>（</rp><rt>しょくいん</rt><rp>）</rp></ruby>はぬれた<ruby>床<rp>（</rp><rt>ゆか</rt><rp>）</rp></ruby>に<ruby>気<rp>（</rp><rt>き</rt><rp>）</rp></ruby>づきました</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-14" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby>が<ruby>廊下<rp>（</rp><rt>ろうか</rt><rp>）</rp></ruby>で<ruby>転倒<rp>（</rp><rt>てんとう</rt><rp>）</rp></ruby>しました</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-14" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>廊下<rp>（</rp><rt>ろうか</rt><rp>）</rp></ruby>の<ruby>床<rp>（</rp><rt>ゆか</rt><rp>）</rp></ruby>は<ruby>初<rp>（</rp><rt>はじ</rt><rp>）</rp></ruby>めから<ruby>乾<rp>（</rp><rt>かわ</rt><rp>）</rp></ruby>いていました</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-14" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>報告<rp>（</rp><rt>ほうこく</rt><rp>）</rp></ruby>の<ruby>場所<rp>（</rp><rt>ばしょ</rt><rp>）</rp></ruby>は１<ruby>階<rp>（</rp><rt>かい</rt><rp>）</rp></ruby>の<ruby>食堂<rp>（</rp><rt>しょくどう</rt><rp>）</rp></ruby>です</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+      <section class="question" id="soal-15" data-key="c" aria-labelledby="judul-15">
+        <p class="topic">Jadwal kerja</p>
+        <h2 id="judul-15" lang="ja" tabindex="-1"><ruby>次<rp>（</rp><rt>つぎ</rt><rp>）</rp></ruby>の<ruby>予定表<rp>（</rp><rt>よていひょう</rt><rp>）</rp></ruby>を<ruby>読<rp>（</rp><rt>よ</rt><rp>）</rp></ruby>んで、<ruby>正<rp>（</rp><rt>ただ</rt><rp>）</rp></ruby>しいものを<ruby>一<rp>（</rp><rt>ひと</rt><rp>）</rp></ruby>つ<ruby>選<rp>（</rp><rt>えら</rt><rp>）</rp></ruby>びなさい。</h2>
+        <div class="passage" lang="ja">
+          <p class="line"><strong>9:00</strong><span><ruby>朝<rp>（</rp><rt>あさ</rt><rp>）</rp></ruby>のミーティング</span></p>
+<p class="line"><strong>10:30</strong><span><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby>と<ruby>体操<rp>（</rp><rt>たいそう</rt><rp>）</rp></ruby></span></p>
+<p class="line"><strong>13:30</strong><span><ruby>居室<rp>（</rp><rt>きょしつ</rt><rp>）</rp></ruby>の<ruby>清掃<rp>（</rp><rt>せいそう</rt><rp>）</rp></ruby></span></p>
+<p class="line"><strong>16:00</strong><span><ruby>記録<rp>（</rp><rt>きろく</rt><rp>）</rp></ruby>を<ruby>書<rp>（</rp><rt>か</rt><rp>）</rp></ruby>く</span></p>
+        </div>
+        <fieldset aria-labelledby="judul-15">
+          <label class="choice">
+            <input type="radio" name="soal-15" value="a">
+            <span class="letter" aria-hidden="true">a.</span>
+            <span lang="ja"><ruby>体操<rp>（</rp><rt>たいそう</rt><rp>）</rp></ruby>は<ruby>午後<rp>（</rp><rt>ごご</rt><rp>）</rp></ruby>１<ruby>時半<rp>（</rp><rt>じはん</rt><rp>）</rp></ruby>に<ruby>始<rp>（</rp><rt>はじ</rt><rp>）</rp></ruby>まります</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-15" value="b">
+            <span class="letter" aria-hidden="true">b.</span>
+            <span lang="ja"><ruby>記録<rp>（</rp><rt>きろく</rt><rp>）</rp></ruby>は<ruby>朝<rp>（</rp><rt>あさ</rt><rp>）</rp></ruby>のミーティングの<ruby>前<rp>（</rp><rt>まえ</rt><rp>）</rp></ruby>に<ruby>書<rp>（</rp><rt>か</rt><rp>）</rp></ruby>きます</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-15" value="c">
+            <span class="letter" aria-hidden="true">c.</span>
+            <span lang="ja"><ruby>居室<rp>（</rp><rt>きょしつ</rt><rp>）</rp></ruby>の<ruby>清掃<rp>（</rp><rt>せいそう</rt><rp>）</rp></ruby>は<ruby>体操<rp>（</rp><rt>たいそう</rt><rp>）</rp></ruby>の<ruby>後<rp>（</rp><rt>あと</rt><rp>）</rp></ruby>です</span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="soal-15" value="d">
+            <span class="letter" aria-hidden="true">d.</span>
+            <span lang="ja"><ruby>午後<rp>（</rp><rt>ごご</rt><rp>）</rp></ruby>４<ruby>時<rp>（</rp><rt>じ</rt><rp>）</rp></ruby>に<ruby>朝<rp>（</rp><rt>あさ</rt><rp>）</rp></ruby>のミーティングをします</span>
+          </label>
+        </fieldset>
+        <p class="feedback" aria-live="polite" hidden></p>
+      </section>
+        <div class="controls" id="navigation" hidden>
+          <button type="button" class="action" id="previous">← Sebelumnya</button>
+          <span class="step" id="step"></span>
+          <button type="button" class="action" id="next">Berikutnya →</button>
+        </div>
+        <div class="grade-controls" id="grade-controls" hidden>
+          <button type="submit" class="action primary">Periksa jawaban</button>
+          <button type="button" class="action" id="reset" disabled>Ulangi latihan</button>
+        </div>
+      </form>
+      <section class="results" id="results" aria-labelledby="score" tabindex="-1" hidden>
+        <h2 id="score"></h2>
+        <p id="breakdown"></p>
+      </section>
+      <details id="answer-key">
+        <summary>Kunci jawaban dan pembahasan</summary>
+        <ol class="key">
+            <li><strong>B.</strong> <span lang="ja"><ruby>必要<rp>（</rp><rt>ひつよう</rt><rp>）</rp></ruby>なときに<ruby>手伝<rp>（</rp><rt>てつだ</rt><rp>）</rp></ruby>えるように<ruby>様子<rp>（</rp><rt>ようす</rt><rp>）</rp></ruby>を<ruby>見<rp>（</rp><rt>み</rt><rp>）</rp></ruby>ること</span><p>見守り（みまもり） artinya mengamati dan siap membantu bila diperlukan. Pada soal ini, Yamada-san tetap makan sendiri.</p></li>
+            <li><strong>D.</strong> <span lang="ja"><ruby>夜<rp>（</rp><rt>よる</rt><rp>）</rp></ruby>に<ruby>働<rp>（</rp><rt>はたら</rt><rp>）</rp></ruby>くこと</span><p>夜勤（やきん） berarti bekerja pada sif malam.</p></li>
+            <li><strong>A.</strong> <span lang="ja"><ruby>後<rp>（</rp><rt>あと</rt><rp>）</rp></ruby>で<ruby>分<rp>（</rp><rt>わ</rt><rp>）</rp></ruby>かるように<ruby>書<rp>（</rp><rt>か</rt><rp>）</rp></ruby>き<ruby>残<rp>（</rp><rt>のこ</rt><rp>）</rp></ruby>します</span><p>記録する（きろくする） berarti mencatat sesuatu agar bisa dilihat kembali.</p></li>
+            <li><strong>C.</strong> <span lang="ja"><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby>が<ruby>生活<rp>（</rp><rt>せいかつ</rt><rp>）</rp></ruby>する<ruby>部屋<rp>（</rp><rt>へや</rt><rp>）</rp></ruby></span><p>居室（きょしつ） adalah kamar atau ruang tempat pengguna layanan tinggal.</p></li>
+            <li><strong>B.</strong> <span lang="ja"><ruby>着替<rp>（</rp><rt>きが</rt><rp>）</rp></ruby>えます</span><p>服に着替えます berarti berganti ke pakaian tertentu. Di sini pakaiannya diganti dengan yang kering.</p></li>
+            <li><strong>A.</strong> <span lang="ja"><ruby>座<rp>（</rp><rt>すわ</rt><rp>）</rp></ruby>って</span><p>いすに座って休みましょう berarti «mari duduk di kursi dan beristirahat».</p></li>
+            <li><strong>D.</strong> <span lang="ja"><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby>が<ruby>話<rp>（</rp><rt>はな</rt><rp>）</rp></ruby>し<ruby>終<rp>（</rp><rt>お</rt><rp>）</rp></ruby>わるまで<ruby>待<rp>（</rp><rt>ま</rt><rp>）</rp></ruby>ちます</span><p>話し終わるまで待ちます berarti menunggu sampai orang selesai berbicara.</p></li>
+            <li><strong>C.</strong> <span lang="ja">わかりました。ここで<ruby>待<rp>（</rp><rt>ま</rt><rp>）</rp></ruby>っていますね</span><p>Pengguna ingin mengenakan jaket sendiri dan meminta waktu. Jawaban c menghargai permintaannya untuk menunggu.</p></li>
+            <li><strong>B.</strong> <span lang="ja"><ruby>折<rp>（</rp><rt>お</rt><rp>）</rp></ruby>り<ruby>紙<rp>（</rp><rt>がみ</rt><rp>）</rp></ruby>は<ruby>午後<rp>（</rp><rt>ごご</rt><rp>）</rp></ruby>２<ruby>時<rp>（</rp><rt>じ</rt><rp>）</rp></ruby>に<ruby>談話室<rp>（</rp><rt>だんわしつ</rt><rp>）</rp></ruby>で<ruby>始<rp>（</rp><rt>はじ</rt><rp>）</rp></ruby>まります</span><p>Nakamura-san memilih origami. Kegiatan dimulai pukul 14.00 di 談話室（だんわしつ）, ruang bersama.</p></li>
+            <li><strong>C.</strong> <span lang="ja"><ruby>今<rp>（</rp><rt>いま</rt><rp>）</rp></ruby>の<ruby>席<rp>（</rp><rt>せき</rt><rp>）</rp></ruby>のままで、<ruby>窓<rp>（</rp><rt>まど</rt><rp>）</rp></ruby>を<ruby>閉<rp>（</rp><rt>し</rt><rp>）</rp></ruby>めてほしいです</span><p>席はこのままでいいです berarti ingin tetap di tempat duduk yang sama. Pengguna meminta jendela ditutup.</p></li>
+            <li><strong>A.</strong> <span lang="ja"><ruby>佐藤<rp>（</rp><rt>さとう</rt><rp>）</rp></ruby>さんは<ruby>昼食<rp>（</rp><rt>ちゅうしょく</rt><rp>）</rp></ruby>を<ruby>全部<rp>（</rp><rt>ぜんぶ</rt><rp>）</rp></ruby><ruby>食<rp>（</rp><rt>た</rt><rp>）</rp></ruby>べました</span><p>Catatan 12.10 menyebut 昼食は全部食べました, yang berarti Sato-san menghabiskan makan siangnya.</p></li>
+            <li><strong>D.</strong> <span lang="ja"><ruby>高橋<rp>（</rp><rt>たかはし</rt><rp>）</rp></ruby>さんはボタンを<ruby>留<rp>（</rp><rt>と</rt><rp>）</rp></ruby>めるときに<ruby>手伝<rp>（</rp><rt>てつだ</rt><rp>）</rp></ruby>いが<ruby>必要<rp>（</rp><rt>ひつよう</rt><rp>）</rp></ruby>です</span><p>Pada bagian 更衣（こうい）, tertulis bantuan hanya diperlukan saat memasang kancing.</p></li>
+            <li><strong>B.</strong> <span lang="ja"><ruby>明日<rp>（</rp><rt>あした</rt><rp>）</rp></ruby>の<ruby>面会<rp>（</rp><rt>めんかい</rt><rp>）</rp></ruby>は<ruby>午後<rp>（</rp><rt>ごご</rt><rp>）</rp></ruby>２<ruby>時<rp>（</rp><rt>じ</rt><rp>）</rp></ruby>に<ruby>変<rp>（</rp><rt>か</rt><rp>）</rp></ruby>わりました</span><p>Jadwal kunjungan besok dipindah dari pukul 10.00 ke 14.00. まだ伝えていません berarti belum diberitahukan.</p></li>
+            <li><strong>A.</strong> <span lang="ja"><ruby>利用者<rp>（</rp><rt>りようしゃ</rt><rp>）</rp></ruby>が<ruby>通<rp>（</rp><rt>とお</rt><rp>）</rp></ruby>る<ruby>前<rp>（</rp><rt>まえ</rt><rp>）</rp></ruby>に、<ruby>職員<rp>（</rp><rt>しょくいん</rt><rp>）</rp></ruby>はぬれた<ruby>床<rp>（</rp><rt>ゆか</rt><rp>）</rp></ruby>に<ruby>気<rp>（</rp><rt>き</rt><rp>）</rp></ruby>づきました</span><p>Petugas melihat lantai basah sebelum pengguna lewat. Laporan menyatakan tidak ada orang yang jatuh.</p></li>
+            <li><strong>C.</strong> <span lang="ja"><ruby>居室<rp>（</rp><rt>きょしつ</rt><rp>）</rp></ruby>の<ruby>清掃<rp>（</rp><rt>せいそう</rt><rp>）</rp></ruby>は<ruby>体操<rp>（</rp><rt>たいそう</rt><rp>）</rp></ruby>の<ruby>後<rp>（</rp><rt>あと</rt><rp>）</rp></ruby>です</span><p>Senam dijadwalkan pukul 10.30 dan pembersihan kamar pukul 13.30, jadi pembersihan dilakukan setelah senam.</p></li>
+        </ol>
+      </details>
+    </div>
+  </main>
+  <footer><div class="wrap"><p>Soal latihan mandiri. Rujukan materi: <a href="https://www.mhlw.go.jp/content/12000000/001471473.pdf" lang="ja">介護の特定技能評価試験 学習テキスト</a>.</p></div></footer>
+  <script>
+    const form = document.getElementById("quiz");
+    const questions = Array.from(form.querySelectorAll(".question"));
+    const jumps = Array.from(document.querySelectorAll(".jump"));
+    const previous = document.getElementById("previous");
+    const next = document.getElementById("next");
+    const reset = document.getElementById("reset");
+    const results = document.getElementById("results");
+    const answerKey = document.getElementById("answer-key");
+    const total = questions.length;
+    let current = 0;
+    let graded = false;
+
+    function showQuestion(index, focusHeading = false) {
+      current = index;
+      questions.forEach((question, questionIndex) => {
+        const active = questionIndex === current;
+        question.hidden = !active;
+        if (active) jumps[questionIndex].setAttribute("aria-current", "step");
+        else jumps[questionIndex].removeAttribute("aria-current");
+      });
+      previous.disabled = current === 0;
+      next.disabled = current === total - 1;
+      document.getElementById("step").textContent = "Soal " + (current + 1) + " dari " + total;
+      if (focusHeading) questions[current].querySelector("h2").focus();
+    }
+
+    function updateAnswers() {
+      let answered = 0;
+      let correct = 0;
+
+      questions.forEach((question, index) => {
+        const selected = question.querySelector("input:checked");
+        const key = question.dataset.key;
+        const label = question.querySelector(".feedback");
+        const isCorrect = selected?.value === key;
+        if (selected) answered++;
+        if (isCorrect) correct++;
+        jumps[index].dataset.answered = String(Boolean(selected));
+
+        question.querySelectorAll(".choice").forEach((choice) => {
+          const input = choice.querySelector("input");
+          choice.classList.toggle("is-correct", graded && input.value === key);
+          choice.classList.toggle("is-wrong", graded && input.checked && !isCorrect);
+        });
+
+        label.hidden = !graded;
+        if (graded) {
+          const hint = "Jawaban benar: " + key.toUpperCase() + ".";
+          if (!selected) label.textContent = "Belum dijawab. " + hint;
+          else if (isCorrect) label.textContent = "Benar.";
+          else label.textContent = "Jawabanmu " + selected.value.toUpperCase() + ". " + hint;
+        }
+      });
+
+      document.getElementById("progress-text").textContent = answered + " dari " + total + " dijawab";
+      document.getElementById("progress").value = answered;
+      reset.disabled = answered === 0 && !graded;
+      if (graded) {
+        document.getElementById("score").textContent = correct + " dari " + total + " benar";
+        document.getElementById("breakdown").textContent = (answered - correct) + " salah · " + (total - answered) + " belum dijawab";
+      }
+    }
+
+    jumps.forEach((jump, index) => jump.addEventListener("click", () => showQuestion(index, true)));
+    previous.addEventListener("click", () => showQuestion(current - 1, true));
+    next.addEventListener("click", () => showQuestion(current + 1, true));
+    document.getElementById("furigana").addEventListener("change", (event) => {
+      document.body.classList.toggle("no-ruby", !event.target.checked);
+    });
+    form.addEventListener("change", updateAnswers);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      graded = true;
+      updateAnswers();
+      results.hidden = false;
+      answerKey.open = true;
+      results.focus();
+    });
+    reset.addEventListener("click", () => {
+      form.reset();
+      graded = false;
+      results.hidden = true;
+      answerKey.open = false;
+      updateAnswers();
+      showQuestion(0, true);
+    });
+
+    function initialQuestion() {
+      const match = /^#soal-(\d+)$/.exec(location.hash);
+      const target = match ? Number(match[1]) : 1;
+      return target >= 1 && target <= total ? target - 1 : 0;
+    }
+    showQuestion(initialQuestion());
+    updateAnswers();
+    ["sidebar", "navigation", "grade-controls"].forEach((id) => {
+      document.getElementById(id).hidden = false;
+    });
+  </script>
+</body>
+</html>
